@@ -48,4 +48,3 @@ class BasePage:
             self.wait_for_element(self.COOKIE_DECLINE).click()
         except:
             print("Cookie decline button not found or already closed.")
-

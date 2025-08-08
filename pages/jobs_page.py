@@ -71,7 +71,6 @@ class JobsPage(BasePage):
 
         self.scroll_to_element(self.VIEW_ROLE_BTN)
 
-        current_window = self.driver.current_window_handle
         handles_before = set(self.driver.window_handles)
 
         self.wait.until(EC.element_to_be_clickable(self.VIEW_ROLE_BTN)).click()
