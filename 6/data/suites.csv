@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","7893","User can filter QA jobs for Istanbul and verify Lever form redirection","tests","Fri Aug 08 12:02:21 GMT 2025","passed","Fri Aug 08 12:02:29 GMT 2025","","test_jobspage","",""
+"","4845","User can open Homepage and verify Careers page sections","tests","Fri Aug 08 12:02:16 GMT 2025","passed","Fri Aug 08 12:02:20 GMT 2025","","test_homepage","",""
