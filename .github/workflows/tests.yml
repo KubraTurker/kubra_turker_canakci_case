@@ -13,12 +13,24 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+
+      - name: Install Chrome and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            google-chrome-stable \
+            chromium-browser \
+            xvfb
+          
+          # Start virtual display for headless Chrome
+          export DISPLAY=:99
+          Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
 
       - name: Install dependencies
         run: |
@@ -28,13 +40,24 @@ jobs:
       - name: Run tests with allure
         run: |
           python -m pytest --alluredir=./allure-results
+        env:
+          DISPLAY: :99
 
       - name: Get Allure history
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         if: always()
+        continue-on-error: true
         with:
           ref: gh-pages
           path: gh-pages
+
+      - name: Copy history
+        if: always()
+        continue-on-error: true
+        run: |
+          if [ -d "gh-pages/allure-history" ]; then
+            cp -r gh-pages/allure-history ./allure-history
+          fi
 
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
